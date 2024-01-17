@@ -1,0 +1,38 @@
+services:
+  # user-service
+  user-service:
+    container_name: user-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://user-database:3306/bootcamp_user
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: MySQL123
+    ports:
+      - 8080:8080
+    networks:
+      - user-network
+    depends_on:
+      - user-database
+  # user-db
+  user-database:
+    container_name: user-database
+    image: mysql:latest
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: bootcamp_user
+      MYSQL_USER: root
+      MYSQL_PASSWORD: MySQL123
+    networks:
+      - user-network
+
+networks:
+  user-network:
+    name: user-network
+
+volumes:
+  mysql-data:

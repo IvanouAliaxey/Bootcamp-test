@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: ddl/users-ddl.xml
+  - include:
+      relativeToChangelogFile: true
+      file: dml/users-dml.xml
+
